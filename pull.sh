@@ -3,18 +3,14 @@ set -euo pipefail
 
 DIR="$HOME/nyt-elections"
 BASE="https://static01.nyt.com/elections-assets/pages/data/2026-11-03"
+TS=$(date '+%Y-%m-%d_%H-%M-%S')
 
 cd "$DIR"
 
-curl -fsSL -o results-senate.json   "$BASE/results-senate.json"
-curl -fsSL -o results-house.json    "$BASE/results-house.json"
-curl -fsSL -o results-governor.json "$BASE/results-governor.json"
+curl -fsSL -o "results-senate-${TS}.json"   "$BASE/results-senate.json"
+curl -fsSL -o "results-house-${TS}.json"    "$BASE/results-house.json"
+curl -fsSL -o "results-governor-${TS}.json" "$BASE/results-governor.json"
 
-git add results-senate.json results-house.json results-governor.json
-
-if git diff --cached --quiet; then
-  exit 0
-fi
-
-git commit -q -m "elections update $(date '+%Y-%m-%d %H:%M:%S')"
+git add results-senate-*.json results-house-*.json results-governor-*.json
+git commit -q -m "elections ${TS}"
 git push
