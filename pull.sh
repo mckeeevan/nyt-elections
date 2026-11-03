@@ -7,10 +7,10 @@ TS=$(date '+%Y-%m-%d_%H-%M-%S')
 
 cd "$DIR"
 
-curl -fsSL -o "results-senate-${TS}.json"   "$BASE/results-senate.json"
-curl -fsSL -o "results-house-${TS}.json"    "$BASE/results-house.json"
-curl -fsSL -o "results-governor-${TS}.json" "$BASE/results-governor.json"
+curl -fsSL -o "senate/results-senate-${TS}.json"   "$BASE/results-senate.json"
+curl -fsSL -o "house/results-house-${TS}.json"    "$BASE/results-house.json"
+curl -fsSL -o "governor/results-governor-${TS}.json" "$BASE/results-governor.json"
 
-git add results-senate-*.json results-house-*.json results-governor-*.json
+git add senate/ house/ governor/
 git commit -q -m "elections ${TS}"
 git push
